@@ -1,7 +1,23 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Link from 'next/link';
+import styles from '../styles/Home.module.css';
+import db from '../services/firestore';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [recipes, setRecipes] = useState(null);
+
+  useEffect(() => {
+    db.collection('recipes')
+      .get()
+      .then(snapshot => {
+        const data = snapshot.docs.map(doc => doc.data());
+        setRecipes(data)
+        console.log(data)
+      })
+  }, []);
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,10 +30,9 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        {
+          recipes != null ? <p>{recipes[0].recipe_name}</p> : null
+        }
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
