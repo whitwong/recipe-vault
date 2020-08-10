@@ -6,11 +6,29 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* colours */
+:root{
+  --primary:#f7ead7;
+  --green: #b9cc95;
+  --pink: #e984a2;
+  --orange: #eca739;
 }
 
-* {
-  box-sizing: border-box;
+/* Link Styles */
+a{
+  text-decoration: none;
+  color: var(--pink);
+}
+
+/* Scrollbar styles */
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--primary);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--pink);
 }
