@@ -3,10 +3,11 @@ Recipe storage app
 
 ---
 ## Tech Stack
-Node.js v12.16.2
-Vercel (hosting)
-Next.js
-React
+- Node.js v12.16.2
+- Vercel (hosting)
+- Next.js
+- React
+- Firebase/Firestore
 
 ---
 ## Default Next.js README
