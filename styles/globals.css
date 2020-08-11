@@ -8,27 +8,41 @@ body {
 
 /* colours */
 :root{
-  --primary:#f7ead7;
-  --green: #b9cc95;
-  --pink: #e984a2;
-  --orange: #eca739;
+  /* --background:#f7ead7;
+  --var1: #e984a2;
+  --var2: #b9cc95;
+  --var3: #eca739; */
+  --background:#f5f0e1;
+  --var1: #ff6e40;
+  --var2: #1e3d59;
+  --var3: #ffc13b;
 }
 
 /* Link Styles */
-a{
+a {
   text-decoration: none;
-  color: var(--pink);
+  color: var(--var1);
+}
+
+button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 /* Scrollbar styles */
 body::-webkit-scrollbar {
-  width: 0.25rem;
+  width: 0.2rem;
 }
 
 body::-webkit-scrollbar-track {
-  background: var(--primary);
+  background: var(--background);
 }
 
 body::-webkit-scrollbar-thumb {
-  background: var(--pink);
+  background: var(--var3);
 }
