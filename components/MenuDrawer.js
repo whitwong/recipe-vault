@@ -8,24 +8,16 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Button,
-  useDisclosure,
 } from "@chakra-ui/core";
 
 
-export default function DrawerExample() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
-
+export default function MenuDrawer({ isOpen, onClose }) {
   return (
     <>
-      {/* <Button  variantColor="teal" onClick={onOpen}>
-        Open
-      </Button> */}
       <Drawer
         isOpen={isOpen}
         placement="right"
         onClose={onClose}
-        finalFocusRef={btnRef}
       >
         <DrawerOverlay />
         <DrawerContent>
