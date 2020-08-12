@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/core';
 
-export default function Layout({ children }) {
+export default function Layout({ children, home }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [whichDrawer, setWhichDrawer] = useState(null);
 
@@ -73,27 +73,34 @@ export default function Layout({ children }) {
 
 
       {/* Add New Recipe Button */}
-      <IconButton
-        onClick={() => handleClick("add")}
-        icon={MdAddCircle}
-        bg="none" 
-        _hover={{ bg:"none" }} 
-        _active={{
-          bg: "none",
-          borderColor: "none",
-        }}   
-        _focus={{
-          boxShadow:"none",
-          outline:"none"
-        }}
-        zIndex={5}
-        color="var(--var1)"
-        fontSize="2.5em"
-        position="fixed"
-        right={0}
-        bottom={50}
-        marginRight="1rem"
-        />
+      {
+        home 
+          ?
+        <IconButton
+          onClick={() => handleClick("add")}
+          icon={MdAddCircle}
+          bg="none" 
+          _hover={{ bg:"none" }} 
+          _active={{
+            bg: "none",
+            borderColor: "none",
+          }}   
+          _focus={{
+            boxShadow:"none",
+            outline:"none"
+          }}
+          zIndex={5}
+          color="var(--var1)"
+          fontSize="2.5em"
+          position="fixed"
+          right={0}
+          bottom={50}
+          marginRight="1rem"
+          />
+          :
+        null
+      }
+ 
 
       {/* Need this to populate page content from other pages */}
       <main>{children}</main>
