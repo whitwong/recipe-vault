@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Layout.module.css';
+import { useState } from 'react';
 import MenuDrawer from './MenuDrawer';
-import { MdMenu } from 'react-icons/md';
+import FormDrawer from './FormDrawer';
+import { MdMenu, MdAddCircle } from 'react-icons/md';
 import { 
   IconButton,
   useDisclosure,
@@ -10,6 +12,12 @@ import {
 
 export default function Layout({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [whichDrawer, setWhichDrawer] = useState(null);
+
+  const handleClick = buttonClicked => {
+    setWhichDrawer(buttonClicked);
+    onOpen();
+  };
 
   return (
     <>
@@ -25,7 +33,7 @@ export default function Layout({ children }) {
       <nav className={styles.navbar}>
         <Link href="/" as={'/'}><a className={styles.navLogo1}>Recipe<span className={styles.navLogo2}>Vault</span></a></Link>
         <IconButton 
-          onClick={onOpen}
+          onClick={() => handleClick("menu")}
           icon={MdMenu} 
           size="lg"
           bg="none" 
@@ -47,8 +55,45 @@ export default function Layout({ children }) {
           />
       </nav>
 
-      {/* Side Menu Drawer */}        
-      <MenuDrawer isOpen={isOpen} onClose={onClose}/>
+      
+      {
+        // Check to see which side drawer to open
+        whichDrawer === "menu"
+          ?
+        // Side Menu Drawer      
+        <MenuDrawer isOpen={isOpen} onClose={onClose} />
+          :
+        whichDrawer === "add"
+          ?
+        // Side Form Drawer
+        <FormDrawer isOpen={isOpen} onClose={onClose} />
+          :
+        null
+      }
+
+
+      {/* Add New Recipe Button */}
+      <IconButton
+        onClick={() => handleClick("add")}
+        icon={MdAddCircle}
+        bg="none" 
+        _hover={{ bg:"none" }} 
+        _active={{
+          bg: "none",
+          borderColor: "none",
+        }}   
+        _focus={{
+          boxShadow:"none",
+          outline:"none"
+        }}
+        zIndex={5}
+        color="var(--var1)"
+        fontSize="2.5em"
+        position="fixed"
+        right={0}
+        bottom={50}
+        marginRight="1rem"
+        />
 
       {/* Need this to populate page content from other pages */}
       <main>{children}</main>
