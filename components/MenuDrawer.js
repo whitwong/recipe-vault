@@ -32,7 +32,7 @@ export default function MenuDrawer({ isOpen, onClose }) {
           </DrawerBody>
 
           <DrawerFooter>
-            <span>
+            <span style={{color:"var(--var2)"}}>
               Created with <FaHeart style={{display:"inline", color: "var(--var1)"}} /> by WWong
             </span>
           </DrawerFooter>
