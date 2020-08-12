@@ -1,13 +1,22 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import Layout from '../components/Layout';
-import { MdDelete, MdEdit } from 'react-icons/md'
+import RecipeCard from '../components/RecipeCard';
 
 export default function Home() {
+  const [recipes, setRecipes] = useState(null)
+
+  // Fetch recipe data
+  useEffect(() => {
+    fetch('/api/recipes')
+      .then(res => res.json())
+      .then(data => setRecipes(data))
+      .catch(err => err)
+  }, []);
 
   return (
-    <Layout>
+    <Layout home>
       <div className={styles.container}>
         <Head>
           <title>Recipe Vault</title>
@@ -15,44 +24,10 @@ export default function Home() {
         </Head>
         
         <main className={styles.main}>
-          {/* Recipe Card Placeholders */}
-          <div className={styles.recipe}>
-            <img className={styles.recipeImage} src="/defaultImg.png" alt="recipe thumb" />
-            <div className={styles.recipeDetails}>
-              <div className={styles.recipeTitle}>Title</div>
-              <div className={styles.recipeIngredients}>Ingredients</div>
-            </div>
-            <div>
-              <MdEdit className={styles.recipeUpdate} />
-              <MdDelete className={styles.recipeDelete}/>
-            </div>
-          </div>
+          {/* Recipe Cards */}
+          {recipes !== null ? <RecipeCard recipes={recipes} /> : null}
 
-          <div className={styles.recipe}>
-            <img className={styles.recipeImage} src="/defaultImg.png" alt="recipe thumb" />
-            <div className={styles.recipeDetails}>
-              <div className={styles.recipeTitle}>Title</div>
-              <div className={styles.recipeIngredients}>Ingredients</div>
-            </div>
-            <div>
-              <MdEdit className={styles.recipeUpdate} />
-              <MdDelete className={styles.recipeDelete}/>
-            </div>
-          </div>
-
-          <div className={styles.recipe}>
-            <img className={styles.recipeImage} src="/defaultImg.png" alt="recipe thumb" />
-            <div className={styles.recipeDetails}>
-              <div className={styles.recipeTitle}>Title</div>
-              <div className={styles.recipeIngredients}>Ingredients</div>
-            </div>
-            <div>
-              <MdEdit className={styles.recipeUpdate} />
-              <MdDelete className={styles.recipeDelete}/>
-            </div>
-          </div>
         </main>
-
       </div>
     </Layout>
   )
