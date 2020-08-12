@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import styles from '../styles/Layout.module.css';
+import { FaHeart } from 'react-icons/fa';
 import {
   Drawer,
   DrawerBody,
@@ -7,7 +9,6 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Button,
 } from "@chakra-ui/core";
 
 
@@ -22,19 +23,18 @@ export default function MenuDrawer({ isOpen, onClose }) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton color="var(--var1)" />
-          <DrawerHeader>Navigation</DrawerHeader>
+          <DrawerHeader color="var(--var2)">Navigation</DrawerHeader>
 
           <DrawerBody>
-            <Link href="/" as="/"><a>Home</a></Link>
+            <Link href="/" as="/"><a className={styles.link}>Home</a></Link>
             <br />
-            <Link href="/about" as="/about"><a>About</a></Link>
+            <Link href="/about" as="/about"><a className={styles.link}>About</a></Link>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button color="var(--var1)" variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button color="var(--var2)">Save</Button>
+            <span>
+              Created with <FaHeart style={{display:"inline", color: "var(--var1)"}} /> by WWong
+            </span>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
