@@ -33,7 +33,7 @@ export default function FormDrawer({ isOpen, onClose }) {
       });
 
     setRecipeName('');
-    setIngredients('');
+    setIngredients([]);
     setInstructions('');
     setCreator('');
     onClose(true); // **Check that this doesn't have any negative/unintentional side effects**

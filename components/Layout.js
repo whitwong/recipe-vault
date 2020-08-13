@@ -55,19 +55,14 @@ export default function Layout({ children, home }) {
           />
       </nav>
 
-      
+
+      {/* Side Drawers */}
       {
         // Check to see which side drawer to open
-        whichDrawer === "menu"
-          ?
-        // Side Menu Drawer      
-        <MenuDrawer isOpen={isOpen} onClose={onClose} />
-          :
-        whichDrawer === "add"
-          ?
-        // Side Form Drawer
-        <FormDrawer isOpen={isOpen} onClose={onClose} />
-          :
+        whichDrawer === "menu" ?
+          <MenuDrawer isOpen={isOpen} onClose={onClose} /> :
+        whichDrawer === "add" ?
+          <FormDrawer isOpen={isOpen} onClose={onClose} /> :
         null
       }
 
