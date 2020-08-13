@@ -3,16 +3,28 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import Layout from '../components/Layout';
 import RecipeCard from '../components/RecipeCard';
+import db from '../lib/firestore';
 
 export default function Home() {
   const [recipes, setRecipes] = useState(null)
 
-  // Fetch recipe data
+  // // Fetch recipe data
+  // useEffect(() => {
+  //   fetch('/api/recipes')
+  //     .then(res => res.json())
+  //     .then(data => setRecipes(data))
+  //     .catch(err => err)
+  // }, []);
+
   useEffect(() => {
-    fetch('/api/recipes')
-      .then(res => res.json())
-      .then(data => setRecipes(data))
-      .catch(err => err)
+    db.collection('recipes')
+      .onSnapshot(snap => {
+        const recipeArr = snap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setRecipes(recipeArr);
+      });
   }, []);
 
   return (
