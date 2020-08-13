@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/core";
 
 
-export default function DeleteModal({ isOpen, onClose, id }) {
+export default function DeleteModal({ isOpen, onClose, id, recipeName }) {
   // Delete recipe and close modal
   const handleDelete = (id) => {
     db.collection('recipes')
@@ -25,7 +25,7 @@ export default function DeleteModal({ isOpen, onClose, id }) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Delete Recipe</ModalHeader>
+        <ModalHeader>Delete Recipe: <span style={{color: "var(--var1)"}}>{recipeName}</span> </ModalHeader>
           <ModalBody>
             <p>Are you sure you want to delete this recipe? Deleted recipe cannot be recovered.</p>
           </ModalBody>
