@@ -9,12 +9,14 @@ import { useDisclosure } from '@chakra-ui/core';
 export default function RecipeCard({ recipes }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [recipeId, setRecipeId] = useState();
+  const [recipeName, setRecipeName] = useState();
   const [whichModal, setWhichModal] = useState(null);
 
   // Click handler to designate which modal to open
-  const handleClick = (action, id) => {
+  const handleClick = (action, id, recipeName) => {
     setWhichModal(action);
     setRecipeId(id);
+    setRecipeName(recipeName);
     onOpen();
   }
 
@@ -31,7 +33,7 @@ export default function RecipeCard({ recipes }) {
             </div>
             <div>
               <MdEdit className={styles.recipeUpdate} data-id={recipe.id} onClick={() => handleClick("update", recipe.id)} />
-              <MdDelete className={styles.recipeDelete} data-id={recipe.id} onClick={() => handleClick("delete", recipe.id)} />
+              <MdDelete className={styles.recipeDelete} data-id={recipe.id} onClick={() => handleClick("delete", recipe.id, recipe.recipe_name)} />
             </div>
           </div>            
         ))
@@ -40,7 +42,7 @@ export default function RecipeCard({ recipes }) {
       {/* Delete/Update Modals */}
       {
         whichModal === "delete" ? 
-          <DeleteModal isOpen={isOpen} onClose={onClose} id={recipeId} /> : 
+          <DeleteModal isOpen={isOpen} onClose={onClose} id={recipeId} recipeName={recipeName} /> : 
         whichModal === "update" ? 
           <UpdateModal isOpen={isOpen} onClose={onClose} id={recipeId} /> : 
         null

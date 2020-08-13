@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/core";
 
 
-export default function DeleteModal({ isOpen, onClose, id }) {
+export default function UpdateModal({ isOpen, onClose, id }) {
 
   return (
     <>
@@ -26,7 +26,9 @@ export default function DeleteModal({ isOpen, onClose, id }) {
             <Button variantColor="blue" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button variant="ghost">Update</Button>
+            <Button variantColor="green">
+              Update
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
