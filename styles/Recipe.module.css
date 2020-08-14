@@ -1,0 +1,32 @@
+.main {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.creator {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.listIngredients {
+  list-style: none;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.listInstructions {
+  list-style: none;
+  margin-top: 0.5rem;
+}

@@ -1,4 +1,4 @@
-// import db from '../lib/firestore';
+import Link from 'next/link';
 import { useState } from 'react';
 import styles from '../styles/Home.module.css';
 import DeleteModal from '../components/DeleteRecipeModal';
@@ -25,17 +25,19 @@ export default function RecipeCard({ recipes }) {
       {/* Recipe Cards */}
       {
         recipes.map(recipe => (
-          <div className={styles.recipe} key={recipe.id} data-id={recipe.id}>
-            <img className={styles.recipeImage} src="/defaultImg.png" alt="recipe thumb" />
-            <div className={styles.recipeDetails}>
-              <div className={styles.recipeTitle}>{recipe.recipe_name}</div>
-              <div className={styles.recipeIngredients}>{recipe.ingredients.join(', ')}</div>
-            </div>
-            <div>
-              <MdEdit className={styles.recipeUpdate} data-id={recipe.id} onClick={() => handleClick("update", recipe.id)} />
-              <MdDelete className={styles.recipeDelete} data-id={recipe.id} onClick={() => handleClick("delete", recipe.id, recipe.recipe_name)} />
-            </div>
-          </div>            
+          <Link key={recipe.id} href='recipes/[id]' as={`recipes/${recipe.id}`}>
+            <div className={styles.recipe} data-id={recipe.id}>
+              <img className={styles.recipeImage} src="/defaultImg.png" alt="recipe thumb" />
+              <div className={styles.recipeDetails}>
+                <div className={styles.recipeTitle}>{recipe.recipe_name}</div>
+                <div className={styles.recipeIngredients}>{recipe.ingredients.join(', ')}</div>
+              </div>
+              <div>
+                <MdEdit className={styles.recipeUpdate} data-id={recipe.id} onClick={() => handleClick("update", recipe.id)} />
+                <MdDelete className={styles.recipeDelete} data-id={recipe.id} onClick={() => handleClick("delete", recipe.id, recipe.recipe_name)} />
+              </div>
+            </div> 
+          </Link>           
         ))
       }
 
