@@ -43,17 +43,7 @@ export default function RecipeDetails({ recipeData }) {
   )
 }
 
-// getStaticPaths() required for dynamic routing. Internal api calls not permitted.
-export async function getStaticPaths() {
-  const paths = await getRecipeIds();
-  return {
-    paths,
-    fallback: false
-  }
-}
-
-// getStaticProps() used to get document details
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const recipeData = await getRecipeDetails(params.id);
 
   return {
@@ -62,3 +52,23 @@ export async function getStaticProps({ params }) {
     }
   }
 }
+
+// // getStaticPaths() required for dynamic routing. Internal api calls not permitted.
+// export async function getStaticPaths() {
+//   const paths = await getRecipeIds();
+//   return {
+//     paths,
+//     fallback: false
+//   }
+// }
+
+// // getStaticProps() used to get document details
+// export async function getStaticProps({ params }) {
+//   const recipeData = await getRecipeDetails(params.id);
+
+//   return {
+//     props: {
+//       recipeData,
+//     }
+//   }
+// }
