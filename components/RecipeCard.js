@@ -26,17 +26,19 @@ export default function RecipeCard({ recipes }) {
       {
         recipes.map(recipe => (
           <Link key={recipe.id} href='recipes/[id]' as={`recipes/${recipe.id}`}>
-            <div className={styles.recipe} data-id={recipe.id}>
-              <img className={styles.recipeImage} src="/defaultImg.png" alt="recipe thumb" />
-              <div className={styles.recipeDetails}>
-                <div className={styles.recipeTitle}>{recipe.recipe_name}</div>
-                <div className={styles.recipeIngredients}>{recipe.ingredients.join(', ')}</div>
-              </div>
-              <div>
-                <MdEdit className={styles.recipeUpdate} data-id={recipe.id} onClick={() => handleClick("update", recipe.id)} />
-                <MdDelete className={styles.recipeDelete} data-id={recipe.id} onClick={() => handleClick("delete", recipe.id, recipe.recipe_name)} />
-              </div>
-            </div> 
+            <a>
+              <div className={styles.recipe} data-id={recipe.id}>
+                <img className={styles.recipeImage} src="/defaultImg.png" alt="recipe thumb" />
+                <div className={styles.recipeDetails}>
+                  <div className={styles.recipeTitle}>{recipe.recipe_name}</div>
+                  <div className={styles.recipeIngredients}>{recipe.ingredients.join(', ')}</div>
+                </div>
+                <div>
+                  <MdEdit className={styles.recipeUpdate} data-id={recipe.id} onClick={() => handleClick("update", recipe.id)} />
+                  <MdDelete className={styles.recipeDelete} data-id={recipe.id} onClick={() => handleClick("delete", recipe.id, recipe.recipe_name)} />
+                </div>
+              </div> 
+            </a>
           </Link>           
         ))
       }
