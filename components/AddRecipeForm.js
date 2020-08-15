@@ -48,7 +48,7 @@ export default function AddRecipeForm({ onClose }) {
         db.collection('recipes')
           .add({
             recipe_name: recipeName,
-            ingredients: ingredients.split(','),
+            ingredients: ingredients.split(',').map(i => i.trim()),
             instructions: orderedInstructions,
             creator: creator,
           });

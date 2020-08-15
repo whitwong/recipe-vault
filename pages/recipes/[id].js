@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Layout from '../../components/Layout';
-import getRecipeIds from '../../lib/getRecipeIds';
 import getRecipeDetails from '../../lib/getRecipeDetails';
 import styles from '../../styles/Recipe.module.css';
 import { 
@@ -43,6 +42,9 @@ export default function RecipeDetails({ recipeData }) {
   )
 }
 
+// With ability to create new recipes and then route to details page, need to retrieve
+// recipe details on each request. Statically generating pages only works for recipes already
+// in Firestore db at build time.
 export async function getServerSideProps({ params }) {
   const recipeData = await getRecipeDetails(params.id);
 
@@ -52,23 +54,3 @@ export async function getServerSideProps({ params }) {
     }
   }
 }
-
-// // getStaticPaths() required for dynamic routing. Internal api calls not permitted.
-// export async function getStaticPaths() {
-//   const paths = await getRecipeIds();
-//   return {
-//     paths,
-//     fallback: false
-//   }
-// }
-
-// // getStaticProps() used to get document details
-// export async function getStaticProps({ params }) {
-//   const recipeData = await getRecipeDetails(params.id);
-
-//   return {
-//     props: {
-//       recipeData,
-//     }
-//   }
-// }
