@@ -1,0 +1,36 @@
+.instructions {
+  display: grid;
+  grid-template-columns: 0.5fr 0.6fr 4fr;
+  grid-template-areas: "delete order direction";
+  align-items: center;
+  margin-bottom: 0.2rem;
+  width: 100%;
+}
+
+.directionDelete {
+  grid-area: delete;
+  margin: auto;
+  color: var(--var1);
+}
+
+.directionOrder {
+  grid-area: order;
+  /* margin: auto; */
+}
+
+.directionValue {
+  grid-area: direction;
+  outline: none;
+}
+
+.directionValue input {
+  width: 100%;
+  outline: none;
+}
+
+.addDirection {
+  color: var(--var3);
+  margin-left: 0.8rem;
+  width: 90%;
+  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
+}

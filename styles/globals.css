@@ -46,8 +46,3 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background: var(--var3);
 }
-
-/* Form Styles */
-div input {
-  margin-bottom: 1rem;
-}
