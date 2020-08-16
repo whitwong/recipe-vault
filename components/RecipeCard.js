@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
+import { IoIosArrowForward } from 'react-icons/io';
 
 export default function RecipeCard({ recipes }) {
   return (
@@ -15,6 +16,7 @@ export default function RecipeCard({ recipes }) {
                   <div className={styles.recipeTitle}>{recipe.recipe_name}</div>
                   <div className={styles.recipeIngredients}>{recipe.ingredients.join(', ')}</div>
                 </div>
+                <IoIosArrowForward className={styles.recipeForward} />
               </div> 
             </a>
           </Link>           
