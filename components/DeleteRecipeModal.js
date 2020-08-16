@@ -1,4 +1,5 @@
 import db from '../lib/firestore';
+import Router from 'next/router';
 import {
   Modal,
   ModalOverlay,
@@ -11,13 +12,14 @@ import {
 
 
 export default function DeleteModal({ isOpen, onClose, id, recipeName }) {
-  // Delete recipe and close modal
+  // Delete recipe, close modal, and re-route back to recipe list page
   const handleDelete = (id) => {
     db.collection('recipes')
       .doc(id)
       .delete()
 
     onClose(true);
+    Router.push('/');
   }
 
   return (
