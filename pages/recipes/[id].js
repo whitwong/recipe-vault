@@ -76,7 +76,7 @@ export default function RecipeDetails({ id, recipeData }) {
         whichModal === "delete" ? 
           <DeleteModal isOpen={isOpen} onClose={onClose} id={recipeId} recipeName={recipeName} /> : 
         whichModal === "update" ? 
-          <UpdateModal isOpen={isOpen} onClose={onClose} id={recipeId} /> : 
+          <UpdateModal isOpen={isOpen} onClose={onClose} id={recipeId} recipeData={recipeData} /> : 
         null
       }
     </Layout>
