@@ -82,6 +82,7 @@ export default function AddRecipeForm({ onClose }) {
               value={ingredients} 
               onChange={({target}) => setIngredients(target.value)} 
             />
+            <FormHelperText id="ingredients-helper-text" marginBottom="1rem">Separate ingredients with commas</FormHelperText>
           </FormControl>
 
           {/* Instructions Field */}
