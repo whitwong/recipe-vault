@@ -4,8 +4,9 @@ import DeleteModal from '../../components/DeleteRecipeModal';
 import UpdateModal from '../../components/UpdateRecipeModal';
 import getRecipeDetails from '../../lib/getRecipeDetails';
 import styles from '../../styles/Recipe.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
+import db from '../../lib/firestore';
 import { 
   Text,
   Divider,
@@ -17,6 +18,17 @@ export default function RecipeDetails({ id, recipeData }) {
   const [recipeId, setRecipeId] = useState();
   const [recipeName, setRecipeName] = useState();
   const [whichModal, setWhichModal] = useState(null);
+  const [recipeDetails, setRecipeData] = useState(recipeData);
+
+  // Listener for recipe updates from update modal
+  useEffect(() => {
+    const doc = db.collection('recipes').doc(id);
+    const observer = doc.onSnapshot(docSnapshot => {
+      setRecipeData(docSnapshot.data())
+    }, err => {
+      console.log(`Encountered error: ${err}`);
+    });
+  }, [])
 
   // Click handler to designate which modal to open
   const handleClick = (action, id, recipeName) => {
@@ -29,18 +41,18 @@ export default function RecipeDetails({ id, recipeData }) {
   return (
     <Layout>
       <Head>
-        <title>{recipeData.recipe_name}</title>
+        <title>{recipeDetails.recipe_name}</title>
       </Head>
       <div className={styles.main}>
         <div className={styles.content}>
-          <Text className={styles.title}>{recipeData.recipe_name}</Text>
-          <Text className={styles.creator}>Created by: {recipeData.creator}</Text>
+          <Text className={styles.title}>{recipeDetails.recipe_name}</Text>
+          <Text className={styles.creator}>Created by: {recipeDetails.creator}</Text>
 
           <Divider borderColor="var(--var1)" margin="0.5rem auto" width="90%" />
 
           <Text className={styles.sectionTitle}>Ingredients</Text>
           <ul className={styles.listIngredients}>
-            {recipeData.ingredients.map((ingredient, i) => (
+            {recipeDetails.ingredients.map((ingredient, i) => (
               <li key={i}>{ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}</li>
             ))}
           </ul>
@@ -49,9 +61,9 @@ export default function RecipeDetails({ id, recipeData }) {
           <Text className={styles.sectionTitle}>Instructions</Text>
           <ul className={styles.listInstructions}>
             {
-              recipeData.instructions === undefined  || recipeData.instructions.length === 0 ?
+              recipeDetails.instructions === undefined  || recipeDetails.instructions.length === 0 ?
               null :
-              recipeData.instructions.map((item, i) => (
+              recipeDetails.instructions.map((item, i) => (
                 <li key={i}>{item.order}. {item.direction}</li>
               ))
             }
@@ -60,7 +72,7 @@ export default function RecipeDetails({ id, recipeData }) {
         <footer className={styles.footer}>
           <div className={styles.edit}>
             <div className={styles.deleteRecipe}>
-              <MdDelete fontSize="1.5rem" onClick={() => handleClick("delete", id, recipeData.recipe_name)} />
+              <MdDelete fontSize="1.5rem" onClick={() => handleClick("delete", id, recipeDetails.recipe_name)} />
               <span style={{fontSize:'0.9rem'}}>Delete</span>
             </div>
             <div className={styles.editRecipe}>
@@ -76,7 +88,7 @@ export default function RecipeDetails({ id, recipeData }) {
         whichModal === "delete" ? 
           <DeleteModal isOpen={isOpen} onClose={onClose} id={recipeId} recipeName={recipeName} /> : 
         whichModal === "update" ? 
-          <UpdateModal isOpen={isOpen} onClose={onClose} id={recipeId} /> : 
+          <UpdateModal isOpen={isOpen} onClose={onClose} id={recipeId} recipeData={recipeDetails} /> : 
         null
       }
     </Layout>
