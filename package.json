@@ -22,7 +22,7 @@
     "@emotion/styled": "^10.0.27",
     "emotion-theming": "^10.0.27",
     "firebase": "^7.17.2",
-    "firebase-admin": "^9.0.0",
+    "firebase-admin": "^11.4.1",
     "formik": "^2.1.5",
     "next": "9.5.4",
     "react": "16.13.1",
